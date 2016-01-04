@@ -7,4 +7,7 @@ install:
   - ./build/ci-install.sh
   - ./build/ci-compile.sh
 script:
-  - phpunit
+  - mkdir -p build/logs
+  - phpunit --coverage-clover build/logs/clover.xml
+after_success:
+  - travis_retry php vendor/bin/coveralls
